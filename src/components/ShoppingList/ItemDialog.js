@@ -1,8 +1,16 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { insertNewTask } from '../../redux/shoppingActions'
 import { CustomButton, CustomDropDown, CustomInput } from './Dialog'
 import './ItemDialog.scss'
 
 const ItemDialog = ({ closeDialog, visible, type }) => {
+    const dispatch = useDispatch()
+
+    const onSave = () => {
+        dispatch(insertNewTask({name:"a", detail:"b"}))
+        closeDialog()
+    }
 
   return (
     <div className="item-dialog" style={{ right: visible ? '0px' : '-560px' }}>
@@ -26,7 +34,7 @@ const ItemDialog = ({ closeDialog, visible, type }) => {
           style={{ marginRight: '30px' }}
           clickHandler={closeDialog}
         />
-        <CustomButton value={type === "new" ? "Add Task" : "Save Item"} type="active" />
+        <CustomButton value={type === "new" ? "Add Task" : "Save Item"} type="active" clickHandler={onSave}/>
       </div>
       <div className="dialog-footer" />
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
   ShoppingListHeader,
   EmptyList,
@@ -8,15 +9,31 @@ import './ShoppingList.scss'
 
 const ShoppingList = () => {
   const [dialogState, setDialogState] = useState(false)
+  const tasks = useSelector((state) => state.tasks)
 
   return (
     <div className="shopping-list">
       <ShoppingListHeader />
       <div className="shopping-list-container">
-        <EmptyList showDialog={() => setDialogState(true)} />
+        {!tasks.length ? (
+          <EmptyList showDialog={() => setDialogState(true)} />
+        ) : (
+          <div>Hello</div>
+        )}
       </div>
-      <ItemDialog closeDialog={() => setDialogState(false)} visible={dialogState} type="new"/>
-      {dialogState && <div className='dialog-back' onClick={() => setDialogState(false)}></div>}
+
+      <ItemDialog
+        closeDialog={() => setDialogState(false)}
+        visible={dialogState}
+        type="new"
+      />
+
+      {dialogState && (
+        <div
+          className="dialog-back"
+          onClick={() => setDialogState(false)}
+        ></div>
+      )}
     </div>
   )
 }
