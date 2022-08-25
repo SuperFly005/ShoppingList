@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './Input.scss'
 
-const Input = ({ singleType, placeHolder }) => {
+const useInput = ({ singleType, placeHolder }) => {
   const [value, setValue] = useState('')
 
-  return singleType === true ? (
+  return [ value, singleType === true ? (
     <input
       className="custom-input"
       placeholder={placeHolder}
@@ -18,7 +18,7 @@ const Input = ({ singleType, placeHolder }) => {
       onChange={(e) => setValue(e.target.value)}
       value={value}
     />
-  )
+  )]
 }
 
-export default Input
+export default useInput

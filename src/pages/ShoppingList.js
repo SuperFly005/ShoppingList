@@ -4,6 +4,7 @@ import {
   ShoppingListHeader,
   EmptyList,
   ItemDialog,
+  ShoppingTask,
 } from '../components/ShoppingList'
 import './ShoppingList.scss'
 
@@ -18,7 +19,9 @@ const ShoppingList = () => {
         {!tasks.length ? (
           <EmptyList showDialog={() => setDialogState(true)} />
         ) : (
-          <div>Hello</div>
+            tasks.map(task => (
+                <ShoppingTask task={task}/>
+            ))
         )}
       </div>
 
