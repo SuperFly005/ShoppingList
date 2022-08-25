@@ -9,3 +9,14 @@
 {
     cursor: pointer;
 }
+
+.dialog-back
+{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(#333,0.4);
+    z-index: 10;
+}

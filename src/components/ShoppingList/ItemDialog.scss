@@ -7,8 +7,11 @@
     position: absolute;
     top: 0px;
     right: 0px;
+    background-color: white;
     display: flex;
     flex-direction: column;
+    transition: 0.3s;
+    z-index: 15;
 
     .dialog-title
     {
