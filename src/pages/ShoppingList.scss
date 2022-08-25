@@ -1,0 +1,10 @@
+@import "../styles/util.scss";
+
+.shopping-list
+{
+
+    .shopping-list-container
+    {
+        @include flex-style(row, center, flex-start);
+    }
+}
