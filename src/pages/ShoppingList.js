@@ -6,6 +6,7 @@ import {
   ItemDialog,
   ShoppingTask,
 } from '../components/ShoppingList'
+import { CustomButton } from '../components/ShoppingList/Dialog'
 import './ShoppingList.scss'
 
 const ShoppingList = () => {
@@ -19,9 +20,15 @@ const ShoppingList = () => {
         {!tasks.length ? (
           <EmptyList showDialog={() => setDialogState(true)} />
         ) : (
-            tasks.map(task => (
-                <ShoppingTask task={task}/>
-            ))
+            <div className='task-list'>
+                <div className='task-list-header'>
+                    Your Items
+                    <CustomButton value="Add Item" type="active" clickHandler={() => setDialogState(true)}/>
+                </div>
+                { tasks.map(task => (
+                    <ShoppingTask task={task}/>
+                ))}
+            </div>
         )}
       </div>
 

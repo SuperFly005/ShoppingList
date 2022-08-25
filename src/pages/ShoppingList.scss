@@ -6,5 +6,20 @@
     .shopping-list-container
     {
         @include flex-style(row, center, flex-start);
+
+        .task-list
+        {
+            width: 100%;
+            margin: 35px 90px 0px 165px;
+            @include flex-style(column, flex-start, center);
+
+            .task-list-header
+            {
+                width: 100%;
+                @include flex-style(row, space-between, center);
+                font-family: 'Nunito';
+                font-size: 18px;
+            }
+        }
     }
 }

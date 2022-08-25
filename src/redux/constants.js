@@ -1,1 +1,2 @@
 export const INSERT_NEW_TASK = "INSERT_NEW_TASK";
+export const PURCHASE_CHANGE = "PURCHASE_CHANGE";
