@@ -1,0 +1,62 @@
+@import "../../styles/util.scss";
+
+.item-dialog
+{
+    width: 560px;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+
+    .dialog-title
+    {
+        box-sizing: border-box;
+        width: 100%;
+        height: 64px;
+        padding: 0px 30px;
+        background-color: #FAFAFA;
+        border-bottom: 1px solid #D5DFE9;
+        font-family: 'Dosis';
+        font-size: 18px;
+        color: #5C6269;
+        @include flex-style(row, space-between, center)
+    }
+
+    .dialog-content
+    {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0px 30px;
+        font-family: 'Nunito';
+
+        .dialog-content-tag
+        {
+            margin-top: 28px;
+            font-size: 18x;
+            color: #2A323C;
+        }
+
+        .dialog-content-subtag
+        {
+            margin: 5px 0px;
+            font-size: 16px;
+            color: #5C6269;
+        }
+    }
+
+    .dialog-button-group
+    {
+        margin-top: auto;
+        padding: 0px 30px;
+        @include flex-style(row, flex-end, center);
+    }
+
+    .dialog-footer
+    {
+        height: 5px;
+        margin-top: 20px;
+        background-color: #4D81B7;
+    }
+}

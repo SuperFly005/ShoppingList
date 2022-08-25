@@ -13,18 +13,4 @@
     font-family: 'Nunito', sans-serif;
     font-size: 18px;
     color: #87898C;
-
-    .empty-list-button
-    {
-        width: 151px;
-        height: 36px;
-        padding: 0px 15px;
-        border-radius: 4px;
-        margin-top: 16px;
-        background: #1871E8;
-        font-size: 14px;
-        color: white;
-        @include flex-style();
-        cursor: pointer;
-    }
 }

@@ -1,0 +1,31 @@
+.custom-input
+{
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    margin: 8px 0px;
+    padding: 0px 15px;
+    border: 1px solid #D5DFE9;
+    border-radius: 4px;
+    font-family: 'Nunito';
+    font-size: 16px;
+    color: #2A323C;
+
+    &::placeholder
+    {
+        color: #9CA8B4;
+    }
+
+    &:focus
+    {
+        outline: none;
+        border: 1px solid #9CA8B4;
+    }
+}
+
+.custom-textarea
+{
+    padding: 15px;
+    height: 140px;
+    resize: none;
+}

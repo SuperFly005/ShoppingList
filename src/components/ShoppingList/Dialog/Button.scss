@@ -1,0 +1,15 @@
+@import '../../../styles/util.scss';
+
+.custom-button
+{
+    width: fit-content;
+    height: 36px;
+    padding: 0px 15px;
+    border-radius: 4px;
+    background: #1871E8;
+    font-family: 'Nunito';
+    font-size: 14px;
+    color: white;
+    @include flex-style();
+    cursor: pointer;
+}
