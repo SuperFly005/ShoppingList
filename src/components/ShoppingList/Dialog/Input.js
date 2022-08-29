@@ -4,7 +4,7 @@ import './Input.scss'
 const useInput = ({ singleType, placeHolder }) => {
   const [value, setValue] = useState('')
 
-  return [ value, singleType === true ? (
+  return [ value, setValue, singleType === true ? (
     <input
       className="custom-input"
       placeholder={placeHolder}

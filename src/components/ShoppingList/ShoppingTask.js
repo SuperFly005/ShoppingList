@@ -4,13 +4,13 @@ import { Checkbox } from '@mui/material'
 import { changePurchased } from '../../redux/shoppingActions'
 import './ShoppingTask.scss'
 
-const ShoppingTask = ({ task }) => {
+const ShoppingTask = ({ taskID, task, showModifyDialog }) => {
   const dispatch = useDispatch()
 
   return (
     <div className="shopping-task">
       <Checkbox
-        onChange={() => dispatch(changePurchased(task.id))}
+        onChange={() => dispatch(changePurchased(taskID))}
         sx={{ margin: '0px 10px' }}
         checked={task.purchased}
       />
@@ -31,7 +31,7 @@ const ShoppingTask = ({ task }) => {
           {task.description}
         </div>
       </div>
-      <div className="material-icons" style={{ marginLeft: 'auto' }}>
+      <div className="material-icons" style={{ marginLeft: 'auto' }} onClick={showModifyDialog}>
         edit
       </div>
       <div className="material-icons" style={{ margin: '0px 20px' }}>

@@ -1,24 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormControl, Select, MenuItem } from '@mui/material'
 
-const DropDown = ({ options }) => {
-  return (
+const useDropDown = (options) => {
+  const [value, setValue] = useState(0)
+
+  return [
+    value,
+    setValue,
     <div className="drop-down">
       <FormControl
         sx={{
           width: '100%',
           height: '50px',
           '&:focus': {
-              outline: 'none',
+            outline: 'none',
           },
         }}
       >
         <Select
           displayEmpty
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          sx={{
+            fontFamily: 'Nunito',
+            fontSize: '16px',
+            color: value === 0 ? '#9CA8B4' : '#2A323C',
+          }}
+          renderValue={() => `${value === 0 ? 'How Many?' : value}`}
         >
-          <MenuItem disabled value="">
-            How Many?
-          </MenuItem>
           {options.map((option) => (
             <MenuItem key={option} value={option}>
               {option}
@@ -26,8 +35,8 @@ const DropDown = ({ options }) => {
           ))}
         </Select>
       </FormControl>
-    </div>
-  )
+    </div>,
+  ]
 }
 
-export default DropDown
+export default useDropDown

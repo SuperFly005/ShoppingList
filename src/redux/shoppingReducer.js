@@ -1,6 +1,7 @@
 import { INSERT_NEW_TASK, PURCHASE_CHANGE } from './constants'
 
 const initialState = {
+  currentID: 0,
   tasks: [],
 }
 
@@ -10,21 +11,27 @@ const shoppingReducer = (state = initialState, action) => {
   switch (type) {
     case INSERT_NEW_TASK:
       return {
-        tasks: [
+        currentID: state.currentID + 1,
+        tasks: {
           ...state.tasks,
-          {
-            id: state.tasks.length,
+          [state.currentID]: {
             ...payload.task,
             purchased: false,
           },
-        ],
+        },
       }
       
     case PURCHASE_CHANGE:
-        const newTasks = [...state.tasks]
-        newTasks[payload.id].purchased = !newTasks[payload.id].purchased
-
-        return { tasks : newTasks }
+        return {
+          currentID: state.currentID,
+          tasks: {
+            ...state.tasks,
+            [payload.id]: {
+              ...state.tasks[payload.id],
+              purchased: !state.tasks[payload.id].purchased
+            }
+          }
+        }
 
     default:
       return {
