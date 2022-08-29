@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { insertNewTask } from '../../redux/shoppingActions'
+import { insertNewTask, modifyTask } from '../../redux/shoppingActions'
 import { CustomButton, useCustomDropDown, useInput } from './Dialog'
 import { Checkbox, FormControlLabel } from '@mui/material'
 import './ItemDialog.scss'
@@ -23,10 +23,14 @@ const ItemDialog = ({ data, visible, type, closeDialog }) => {
     setDescription(!data ? '' : data.description)
     setPurchased(!data ? false : data.purchased)
     setCount(!data ? 0 : data.count)
-  }, [data])
+  }, [data, setName, setDescription, setCount])
 
   const onSave = () => {
-    dispatch(insertNewTask({ name, description, count }))
+    if(type === 'new') {
+      dispatch(insertNewTask({ name, description, count }))
+    } else {
+      dispatch(modifyTask(data.id, { name, description, count, purchased }))
+    }
     closeDialog()
   }
 

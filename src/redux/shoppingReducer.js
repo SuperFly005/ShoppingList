@@ -1,4 +1,4 @@
-import { INSERT_NEW_TASK, PURCHASE_CHANGE } from './constants'
+import { INSERT_NEW_TASK, MODIFY_TASK, PURCHASE_CHANGE } from './constants'
 
 const initialState = {
   currentID: 0,
@@ -17,6 +17,17 @@ const shoppingReducer = (state = initialState, action) => {
           [state.currentID]: {
             ...payload.task,
             purchased: false,
+          },
+        },
+      }
+    
+    case MODIFY_TASK:
+      return {
+        currentID: state.currentID,
+        tasks: {
+          ...state.tasks,
+          [payload.id]: {
+            ...payload.task,
           },
         },
       }

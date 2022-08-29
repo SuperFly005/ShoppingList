@@ -18,7 +18,7 @@ const ShoppingList = () => {
   const showDialog = (type, id=0) => {
     setDialogState(true)
     setDialogType(type)
-    setDialogData(type === 'new' ? {name: "", description: "", count: 0, purchased: false} : tasks[id])
+    setDialogData(type === 'new' ? {id, name: "", description: "", count: 0, purchased: false} : { id, ...tasks[id] })
   }
 
   return (
