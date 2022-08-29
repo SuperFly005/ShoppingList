@@ -1,24 +1,42 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   ShoppingListHeader,
   EmptyList,
   ItemDialog,
   ShoppingTask,
+  DeleteDialog,
 } from '../components/ShoppingList'
 import { CustomButton } from '../components/ShoppingList/Dialog'
+import { deleteItem } from '../redux/shoppingActions'
 import './ShoppingList.scss'
 
 const ShoppingList = () => {
   const [dialogState, setDialogState] = useState(false)
   const [dialogType, setDialogType] = useState('new')
-  const [dialogData, setDialogData] = useState({name: "", description: "", count: 0, purchased: false})
+  const [dialogData, setDialogData] = useState({
+    name: '',
+    description: '',
+    count: 0,
+    purchased: false,
+  })
+  const [deleteItemID, setDeleteItemID] = useState(-1)
   const tasks = useSelector((state) => state.tasks)
+  const dispatch = useDispatch()
 
-  const showDialog = (type, id=0) => {
+  const showDialog = (type, id = 0) => {
     setDialogState(true)
     setDialogType(type)
-    setDialogData(type === 'new' ? {id, name: "", description: "", count: 0, purchased: false} : { id, ...tasks[id] })
+    setDialogData(
+      type === 'new'
+        ? { id, name: '', description: '', count: 0, purchased: false }
+        : { id, ...tasks[id] },
+    )
+  }
+
+  const deleteItemHandler = () => {
+    dispatch(deleteItem(deleteItemID))
+    setDeleteItemID(-1)
   }
 
   return (
@@ -26,9 +44,7 @@ const ShoppingList = () => {
       <ShoppingListHeader />
       <div className="shopping-list-container">
         {!Object.keys(tasks).length ? (
-          <EmptyList
-            showDialog={() => showDialog("new")}
-          />
+          <EmptyList showDialog={() => showDialog('new')} />
         ) : (
           <div className="task-list">
             <div className="task-list-header">
@@ -36,11 +52,16 @@ const ShoppingList = () => {
               <CustomButton
                 value="Add Item"
                 type="active"
-                clickHandler={() => showDialog("new")}
+                clickHandler={() => showDialog('new')}
               />
             </div>
             {Object.keys(tasks).map((id) => (
-              <ShoppingTask taskID={id} task={tasks[id]} showModifyDialog={() => showDialog("modify", id)}/>
+              <ShoppingTask
+                taskID={id}
+                task={tasks[id]}
+                showModifyDialog={() => showDialog('modify', id)}
+                deleteItemHandler={() => setDeleteItemID(id)}
+              />
             ))}
           </div>
         )}
@@ -53,10 +74,20 @@ const ShoppingList = () => {
         closeDialog={() => setDialogState(false)}
       />
 
-      {dialogState && (
+      {deleteItemID>=0 && (
+        <DeleteDialog
+          hideDialog={() => setDeleteItemID(-1)}
+          deleteItemHandler={deleteItemHandler}
+        />
+      )}
+
+      {(dialogState || deleteItemID>=0) && (
         <div
           className="dialog-back"
-          onClick={() => setDialogState(false)}
+          onClick={() => {
+            setDialogState(false)
+            setDeleteItemID(-1)
+          }}
         ></div>
       )}
     </div>

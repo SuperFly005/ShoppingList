@@ -7,8 +7,11 @@ const Button = ({ value, type, style, clickHandler }) => {
       className="custom-button"
       style={{
         ...style,
-        backgroundColor: type === 'active' ? '#1871E8' : '#FAFAFA',
+        backgroundColor: type === 'active' ? '#1871E8' : 'white',
         color: type === 'active' ? 'white' : 'black',
+        "&:hover": {
+          backgroundColor: type === 'active' ? '#3891f8' : '#FAFAFA',
+        }
       }}
       onClick={clickHandler}
     >

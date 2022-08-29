@@ -1,4 +1,4 @@
-import { INSERT_NEW_TASK, MODIFY_TASK, PURCHASE_CHANGE } from './constants'
+import { DELETE_ITEM, INSERT_NEW_TASK, MODIFY_TASK, PURCHASE_CHANGE } from './constants'
 
 const initialState = {
   currentID: 0,
@@ -43,6 +43,15 @@ const shoppingReducer = (state = initialState, action) => {
             }
           }
         }
+    
+    case DELETE_ITEM:
+      const newTasks = state.tasks;
+      delete newTasks[payload.id]
+
+      return {
+        currentID: state.currentID,
+        tasks: newTasks,
+      }
 
     default:
       return {

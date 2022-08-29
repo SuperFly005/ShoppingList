@@ -4,7 +4,7 @@ import { Checkbox } from '@mui/material'
 import { changePurchased } from '../../redux/shoppingActions'
 import './ShoppingTask.scss'
 
-const ShoppingTask = ({ taskID, task, showModifyDialog }) => {
+const ShoppingTask = ({ taskID, task, showModifyDialog, deleteItemHandler }) => {
   const dispatch = useDispatch()
 
   return (
@@ -34,7 +34,7 @@ const ShoppingTask = ({ taskID, task, showModifyDialog }) => {
       <div className="material-icons" style={{ marginLeft: 'auto' }} onClick={showModifyDialog}>
         edit
       </div>
-      <div className="material-icons" style={{ margin: '0px 20px' }}>
+      <div className="material-icons" style={{ margin: '0px 20px' }} onClick={deleteItemHandler}>
         delete
       </div>
     </div>
