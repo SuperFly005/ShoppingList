@@ -7,15 +7,18 @@ import './ItemDialog.scss'
 
 const ItemDialog = ({ data, visible, type, closeDialog }) => {
   const dispatch = useDispatch()
+  const [error, setError] = useState(false)
   const [name, setName, nameInput] = useInput({
     placeHolder: 'Item Name',
     singleType: true,
+    errorHandler: () => setError(false)
   })
   const [description, setDescription, descriptionInput] = useInput({
     placeHolder: 'Description',
     singleType: false,
+    errorHandler: () => setError(false)
   })
-  const [count, setCount, countDropDown] = useCustomDropDown([1, 2, 3, 4, 5])
+  const [count, setCount, countDropDown] = useCustomDropDown([1, 2, 3, 4, 5], () => setError(false))
   const [purchased, setPurchased] = useState(false)
 
   useEffect(() => {
@@ -23,9 +26,17 @@ const ItemDialog = ({ data, visible, type, closeDialog }) => {
     setDescription(!data ? '' : data.description)
     setPurchased(!data ? false : data.purchased)
     setCount(!data ? 0 : data.count)
+    setError(false)
   }, [data, setName, setDescription, setCount])
 
   const onSave = () => {
+    const sName = name.trim()
+    const sDescription = description.trim()
+    if(sName==="" || sDescription==="" || count===0) {
+      setError(true)
+      return
+    }
+
     if(type === 'new') {
       dispatch(insertNewTask({ name, description, count }))
     } else {
@@ -66,6 +77,7 @@ const ItemDialog = ({ data, visible, type, closeDialog }) => {
           />
         )}
       </div>
+      {error && <span className='item-dialog-error'>Must fill all the fields...</span>}
       <div className="dialog-button-group">
         <CustomButton
           value="Cancel"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FormControl, Select, MenuItem } from '@mui/material'
 
-const useDropDown = (options) => {
+const useDropDown = (options, errorHandler) => {
   const [value, setValue] = useState(0)
 
   return [
@@ -20,7 +20,10 @@ const useDropDown = (options) => {
         <Select
           displayEmpty
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            setValue(e.target.value)
+            errorHandler()
+          }}
           sx={{
             fontFamily: 'Nunito',
             fontSize: '16px',
